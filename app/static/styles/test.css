@@ -1,0 +1,176 @@
+.navbar {
+   display: flex;
+   justify-content: space-between;
+   background-color: #222;
+   align-items: center;
+   margin-bottom: -60px;
+}
+
+
+.btn {
+   display: none;
+}
+.navbar-brand {
+   color: #9d9d9d;
+
+   text-decoration: none;
+   margin-left: 10px;
+   vertical-align: center;
+}
+@media (max-width: 768px) {
+   .navbar-brand {
+      margin: auto;
+   }
+   .btn {
+      display: block;
+      float: left;
+      margin-left: 10px;
+      height: 40px;
+      margin-top: 5px;
+   }
+   .container {
+      width: 100%;
+      display: flex;
+   }
+}
+
+/* Out of navbar */
+#main-section {
+   overflow: hidden;
+   width: 100%;
+}
+
+#sidebar {
+   float: left;
+   min-height: 96vh;
+   padding-right: 1.5em;
+   border-right: 0.5px solid #9d9d9d;
+}
+
+#siderbar p {
+   padding-left: 2em;
+   padding-right: 2em;
+}
+
+#sidebar p:hover {
+   background-color: #9d9d9d;
+}
+
+#sidebar.view-sidebar {
+   display: none;
+}
+
+@media (max-width: 768px) {
+   #sidebar {
+      display: none;
+   }
+
+   #sidebar.view-sidebar {
+      display: block;
+   }
+
+   #show-sidebar-button {
+      visibility: visible;
+      opacity: 1;
+   }
+}
+
+.cursor-pointer {
+   cursor: pointer;
+}
+
+#rightside-pannel {
+   overflow: hidden;
+}
+
+#display-message-section {
+   margin-top: 5em;
+   min-height: 70vh;
+   max-height: 70vh;
+   overflow-y: auto;
+}
+
+#input-area {
+   padding-left: 1em;
+   padding-right: 1em;
+   bottom: 0;
+}
+
+input[type="text"]:focus {
+   border-color: #9d9d9d;
+   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 10px #ffc107;
+}
+
+@keyframes fadeIn {
+   0% {
+      opacity: 0;
+   }
+   100% {
+      opacity: 1;
+   }
+}
+
+.others-msg {
+   margin-right: 7em;
+   margin-left: 1em;
+   padding: 0.5em 0.5em 0.5em 1em;
+   border-radius: 5px;
+   border-color: grey;
+   border-width: 0.5px;
+   border-style: solid;
+   background-color: #c2dbfb;
+   /* animation */
+   animation-name: fadeIn;
+   animation-duration: 0.75s;
+   animation-fill-mode: forwards;
+   animation-timing-function: ease-in-out;
+}
+
+.my-msg {
+   margin-left: 7em;
+   margin-right: 1em;
+   padding: 0.5em 0.5em 0.5em 1em;
+   border-radius: 5px;
+   border-color: #206ed2;
+   border-width: 1px;
+   border-style: solid;
+   /* animation */
+   animation-name: fadeIn;
+   animation-duration: 0.75s;
+   animation-fill-mode: forwards;
+   animation-timing-function: ease-in-out;
+}
+
+.system-msg {
+   margin-right: 7em;
+   margin-left: 1em;
+   padding: 0.5em 0.5em 0.5em 1em;
+   color: #656d78;
+   font-size: 0.9em;
+}
+
+.timestamp {
+   color: #656d78;
+   font-size: 0.7em;
+}
+
+.other-username {
+   font-weight: bold;
+   font-size: 1.1em;
+   color: #206ed2;
+}
+
+.my-username {
+   font-weight: bold;
+   font-size: 1.1em;
+   color: #ff6b13;
+}
+
+#msg-input {
+   border-color: #ffc107;
+   border-width: 5px;
+}
+
+#get-username {
+   display: none !important;
+}

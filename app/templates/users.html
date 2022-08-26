@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% import '_macros.html' as macros%}
+
+{% block title %}W-C-A - {{ title }} {{users.username}}{% endblock %}
+
+{% block page_content %}
+
+<table class="table table-hover users">
+   <thead><tr><th>User</th><th>Since</th></tr></thead>
+   {% for user in users %}
+   <tr>
+      <td>
+         <a href="{{ url_for('.user', username= user.username)}}">
+            <img src="{{ user.gravatar(size=32)}}" class="img-rounded" alt="">
+               {{user.username}}
+         </a>
+      </td>
+      <td>{{ moment(user.member_since).format('LL')}}</td>
+   </tr>
+   {% endfor %}
+</table>
+{% endblock %}

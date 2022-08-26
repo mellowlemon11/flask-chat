@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% import '_macros.html' as macros%} {% block page_content %}
+<table class="table table-hover results">
+   {% for user in users %} {%if user.id in ids_list%}
+   <thead>
+      <tr>
+         <th>Friend Requests</th>
+      </tr>
+   </thead>
+   <tr>
+      <td>
+         <a href="{{ url_for('.user', username=user.username)}}">
+            <img src="{{ user.gravatar(size=32)}}" class="img-rounded" alt="" />
+            {{ user.username }}
+         </a>
+      </td>
+      <td>
+         <a href="{{ url_for('main.confirm_request', username=user.username)}}" class="btn btn-primary">Accept</a>
+         <a href="{{ url_for('main.remove_request', username=user.username)}}" class="btn btn-primary">Decline</a>
+      </td>
+      <td></td>
+      <br />
+   </tr>
+</table>
+{% endif %} {% endfor %} {% endblock %} {% block num_f_requests %} {% if numfr > 0 %}
+<span class="badge bg-danger frbadge" style="background-color: red">{{numfr}} </span>
+
+{% endif %} {% endblock %}

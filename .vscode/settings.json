@@ -1,0 +1,5 @@
+{
+   "python.linting.enabled": false,
+   "C_Cpp.errorSquiggles": "Disabled",
+   "dataworkspace.excludedProjects": ["data/data.sqlproj"]
+}

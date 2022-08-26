@@ -1,0 +1,124 @@
+{% extends 'base.html' %} {% block head %} {{ super() }}
+
+<link rel="stylesheet" href="{{url_for('static', filename='styles/test.css')}}" type="text/css" />
+
+{% endblock %} {% block navbar %}
+<div class="wrapper">
+   <div class="navbar navbar-overlay navbar-inverse" role="navigation">
+      <div class="container">
+         <button class="btn" id="show-sidebar-button"
+         
+         type="button"
+               data-toggle="collapse"
+               data-target="#sidebar"
+               aria-controls="sidebar"
+               aria-expanded="false"
+               aria-label="Toggle navigation"
+         >ROOMS</button>
+         <a class="navbar-brand" href="{{ url_for('main.chat') }}">Flasky Chat</a>
+         <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target=".navbar-collapse"
+         >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+         </button>
+
+         <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+               {% if current_user.is_authenticated %}
+               <li>
+                  <a href="{{ url_for('main.user', username=current_user.username) }}"> Profile </a>
+               </li>
+
+               {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+               {% if current_user.is_authenticated %}
+               <li>
+                  <a href="{{ url_for('main.friend_requests')}}" class="btn"
+                     >Friend Requests {% block num_f_requests %} {% endblock %}
+                  </a>
+               </li>
+
+               <li>
+                  <a href="{{ url_for('auth.logout') }}">Log Out</a>
+               </li>
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                     >Account <b class="caret"></b
+                  ></a>
+                  <ul class="dropdown-menu">
+                     <li>
+                        <a href="{{ url_for('auth.change_password') }}">Change Password </a>
+                     </li>
+                     <li>
+                        <a href="{{ url_for('auth.change_email_request') }}">Change Email</a>
+                     </li>
+                     <li>
+                        <a href="{{ url_for('auth.logout') }}">Log Out</a>
+                     </li>
+                  </ul>
+               </li>
+               {% else %}
+               <li>
+                  <a href="{{ url_for('auth.login') }}">Log In</a>
+               </li>
+               {% endif %}
+            </ul>
+         </div>
+      </div>
+   </div>
+   {% endblock %} {% block page_content %}
+   <div id="main-section">
+      <nav id="sidebar">
+         <h4>Rooms</h4>
+         {% for room in rooms %}
+         <p id="{{ room|title }}" class="select-room cursor-pointer">{{ room|title }}</p>
+         {% endfor %}
+      </nav>
+
+      <!-- Rightside pannel start -->
+      <div id="rightside-pannel">
+         <!-- Display message start-->
+         <div id="display-message-section"></div>
+         <!-- Display message end -->
+
+         <!-- Type message start -->
+         <div id="input-area" class="input-group mb-3">
+            <input
+               type="text"
+               id="user_message"
+               class="form-control"
+               placeholder="Type here..."
+               aria-label="Type a message"
+               aria-describedby="basic-addon2"
+               autocomplete="off"
+            />
+            <div class="input-group-append">
+               <button id="send_message" class="btn btn-warning" type="button">
+                  SEND
+                  <i class="fas fa-paper-plane"></i>
+               </button>
+            </div>
+         </div>
+         <!-- Type message end -->
+      </div>
+   </div>
+</div>
+   <span id="get-username">{{ username }}</span>
+   {% endblock %} {% block scripts %} {{ super() }} {{ moment.include_moment() }}
+   <script src="{{ url_for('static', filename='scripts/chat_page.js') }}"></script>
+   <script src="{{ url_for('static', filename='scripts/socketio.js') }}"></script>
+   <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.min.js"
+      integrity="sha512-pxLMWs4E33rW9tdIhovcCp2dCo9k4Q8eHw7CETjyjdXf4aX6wvsEBq+KdOJJRFALr6FxNoXx+jksgbE74TZjEw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+   ></script>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block title %}W-G-A{% endblock%} {% block page_content %}
+<div class="page-header"></div>
+<form method="post">
+   <input type="text" placeholder="Search users" name="search" />
+   <button type="submit"><i class="fa fa-search">Search</i></button>
+</form>
+<table class="table table-hover results">
+   {% for item in data %} {%if item.username == search or item.hashtag == search %}
+   <thead>
+      <tr>
+         <th>Results</th>
+      </tr>
+   </thead>
+   <tr>
+      <td>
+         <a href="{{ url_for('.user', username=item.username)}}">
+            <img src="{{ item.gravatar(size=32)}}" class="img-rounded" alt="" />
+            {{ item.username }}
+         </a>
+      </td>
+      <td>
+         {% if user != current_user and not current_user.is_friends(user) and not current_user.in_request(user) and not
+         user.in_request(current_user) %}<a href="{{ url_for('.send_friend_request', username=user.username) }}" class="btn btn-primary"
+            >Add Friend</a
+         >
+         {%endif%}
+      </td>
+      <br />
+   </tr>
+</table>
+{% endif %} {% endfor %} {% endblock %}
